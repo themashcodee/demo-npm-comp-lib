@@ -1,5 +1,5 @@
 {
-  "version": "0.1.2",
+  "version": "0.1.4",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -20,7 +20,7 @@
     "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build-tailwind": "npx tailwindcss -o ./dist/tailwind.css --minify"
+    "build-tailwind": "npx tailwindcss -o ./dist/style.css --minify"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -73,9 +73,10 @@
     "tailwindcss": "^2.2.19",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.4",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
     "@headlessui/react": "^1.4.2",
     "framer-motion": "^5.3.0"
-  },
-  "dependencies": {}
+  }
 }

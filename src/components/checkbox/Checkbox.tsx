@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
+import React, { FC, HTMLAttributes, useLayoutEffect, useState } from 'react';
 import { motion, useAnimation, Variants } from 'framer-motion';
 import { Switch } from '@headlessui/react';
 
@@ -17,6 +17,19 @@ const variant: Variants = {
     backgroundColor: '#3b82f6',
   },
 };
+const svgOutlineAnim: Variants = {
+  initial: {
+    opacity: 0,
+    pathLength: 0,
+  },
+  animate: {
+    opacity: 1,
+    pathLength: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 
 export const Checkbox: FC<CheckBoxProps> = ({
   initialState = 'disabled',
@@ -27,7 +40,7 @@ export const Checkbox: FC<CheckBoxProps> = ({
   );
   const controls = useAnimation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     enabled ? controls.start('animate') : controls.start('initial');
   }, [enabled]);
 
@@ -43,20 +56,24 @@ export const Checkbox: FC<CheckBoxProps> = ({
         initial="initial"
         animate={controls}
         variants={variant}
-        // transition={{ duration: 0.2 }}
-        className={`h-full w-12 rounded text-white flex justify-center items-center p-2`}
+        className="h-full w-12 rounded text-white flex justify-center items-center p-2"
       >
         {enabled && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-full w-full"
-            viewBox="0 0 20 20"
-            fill="currentColor"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <path
-              fillRule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-              clipRule="evenodd"
+            <motion.path
+              initial="initial"
+              animate="animate"
+              variants={svgOutlineAnim}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
             />
           </svg>
         )}
