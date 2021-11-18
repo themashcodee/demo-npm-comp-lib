@@ -1,5 +1,5 @@
 {
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -37,8 +37,12 @@
     "trailingComma": "es5"
   },
   "name": "demo-npm-comp-lib",
-  "author": "Mash Codee",
   "module": "dist/demo-npm-comp-lib.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/themashcodee/demo-npm-comp-lib"
+  },
+  "author": "Mash Codee <codeemash@gmail.com>",
   "size-limit": [
     {
       "path": "dist/demo-npm-comp-lib.cjs.production.min.js",
