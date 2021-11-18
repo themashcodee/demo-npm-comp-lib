@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useLayoutEffect, useState } from 'react';
+import React, { FC, HTMLAttributes, useState, useEffect } from 'react';
 import { motion, useAnimation, Variants } from 'framer-motion';
 import { Switch } from '@headlessui/react';
 
@@ -27,6 +27,7 @@ const svgOutlineAnim: Variants = {
     pathLength: 1,
     transition: {
       duration: 0.5,
+      delay: 0.3,
     },
   },
 };
@@ -40,7 +41,7 @@ export const Checkbox: FC<CheckBoxProps> = ({
   );
   const controls = useAnimation();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     enabled ? controls.start('animate') : controls.start('initial');
   }, [enabled]);
 
@@ -53,12 +54,12 @@ export const Checkbox: FC<CheckBoxProps> = ({
     >
       <span className="sr-only">{ariaLabel}</span>
       <motion.span
-        initial="initial"
+        initial={initialState === 'disabled' ? 'initial' : 'animate'}
         animate={controls}
         variants={variant}
         className="h-full w-12 rounded text-white flex justify-center items-center p-2"
       >
-        {enabled && (
+        {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-full w-full"
@@ -67,8 +68,8 @@ export const Checkbox: FC<CheckBoxProps> = ({
             stroke="currentColor"
           >
             <motion.path
-              initial="initial"
-              animate="animate"
+              initial={initialState === 'disabled' ? 'initial' : 'animate'}
+              animate={controls}
               variants={svgOutlineAnim}
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -76,7 +77,7 @@ export const Checkbox: FC<CheckBoxProps> = ({
               d="M5 13l4 4L19 7"
             />
           </svg>
-        )}
+        }
       </motion.span>
     </Switch>
   );
